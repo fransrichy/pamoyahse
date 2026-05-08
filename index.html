@@ -131,18 +131,78 @@
       border-radius: 4px;
     }
     
+    /* Updated Hero Layout: Text left, Image box at bottom edge (centered on mobile) */
     @media (min-width: 768px) {
-      .hero-grid { display: flex; align-items: center; gap: 3rem; }
-      .hero-left { flex: 1.2; }
-      .hero-right { flex: 0.9; display: flex; justify-content: flex-end; }
+      .hero-grid {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+      }
+      .hero-left {
+        flex: 1.2;
+      }
+      .hero-image-container {
+        flex: 0.9;
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 0;
+      }
     }
     @media (max-width: 767px) {
-      .hero-right { margin-top: 2rem; justify-content: center; }
-      .hero-buttons { justify-content: center; }
+      .hero-image-container {
+        margin-top: 2rem;
+        margin-bottom: 0;
+        justify-content: center;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
     }
-    .hero-buttons { display: flex; flex-wrap: wrap; gap: 1.2rem; }
     
-    /* Floating buttons – NO ANIMATION, only basic hover */
+    /* Beautiful glass box for the image - bottom edge style */
+    .image-glass-box {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(16px);
+      border-radius: 32px;
+      padding: 1.2rem 1.2rem 0.8rem 1.2rem;
+      border: 1px solid rgba(46, 125, 100, 0.3);
+      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .image-glass-box:hover {
+      background: rgba(255, 255, 255, 0.7);
+      transform: translateY(-5px);
+    }
+    .image-glass-box img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(8px);
+      padding: 0.5rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--hse-blue);
+      margin-top: 0.75rem;
+      border: 1px solid rgba(46, 125, 100, 0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+    
+    /* Floating buttons – NO ANIMATION */
     .float-call, .float-whatsapp {
       position: fixed;
       bottom: 30px;
@@ -177,12 +237,26 @@
       .float-whatsapp { right: 20px; }
     }
     
+    /* Footer logo bigger and well fitted */
+    .footer-logo-large {
+      max-width: 180px;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+    }
+    @media (min-width: 768px) {
+      .footer-logo-large {
+        max-width: 200px;
+      }
+    }
+    
     html { scroll-behavior: smooth; }
   </style>
 </head>
 <body>
 
-<!-- Floating buttons: NO AOS, NO pulse animation -->
+<!-- Floating buttons -->
 <div class="float-call">
   <a href="tel:+264811291157" aria-label="Call us"><i class="fas fa-phone-alt"></i></a>
 </div>
@@ -190,7 +264,7 @@
   <a href="https://wa.me/264811291157" target="_blank" aria-label="WhatsApp us"><i class="fab fa-whatsapp"></i></a>
 </div>
 
-<!-- Header: NO AOS on logo -->
+<!-- Header (unchanged) -->
 <header class="glass-header sticky top-0 z-50 w-full">
   <div class="max-w-7xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between">
     <div class="brand-logo transition-transform hover:scale-105">
@@ -216,9 +290,10 @@
 </header>
 
 <main>
-  <!-- Hero Section (content animations remain) -->
+  <!-- Hero Section: Text left, Image in beautiful glass box at bottom edge -->
   <section class="max-w-7xl mx-auto px-6 py-12 md:py-20">
     <div class="hero-grid">
+      <!-- Left side text content -->
       <div class="hero-left" data-aos="fade-up" data-aos-duration="800">
         <div class="inline-flex items-center gap-2 bg-[#2e7d64]/10 backdrop-blur-sm px-5 py-2 rounded-full text-[#2e7d64] text-sm font-semibold mb-5">
           <i class="fas fa-shield-heart"></i> <span>Certified Excellence</span>
@@ -243,21 +318,21 @@
         </div>
       </div>
       
-      <div class="hero-right" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
-        <div class="relative">
-          <div class="absolute inset-0 bg-[#2e7d64]/5 rounded-full blur-3xl"></div>
-          <img src="images/safety.png" alt="HSE Safety Professional" class="floating-png w-72 md:w-80 lg:w-96 h-auto drop-shadow-2xl relative z-10"
+      <!-- Right side: Beautiful glass box at bottom edge, centered on mobile -->
+      <div class="hero-image-container" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
+        <div class="image-glass-box floating-png">
+          <img src="images/safety.png" alt="HSE Safety Professional" class="w-72 md:w-80 lg:w-96 h-auto drop-shadow-lg mx-auto"
                onerror="this.onerror=null; this.src='https://placehold.co/400x400/2e7d64/ffffff?text=HSE+Safety+Pro&font=montserrat';">
-          <div class="mt-4 text-center md:text-left bg-white/50 backdrop-blur-sm inline-block px-5 py-2 rounded-full border border-[#2e7d64]/30">
-            <i class="fas fa-calendar-alt text-[#9b6a4b] mr-2"></i>
-            <span class="font-semibold text-[#0f3b5f]">Trusted HSE Partner Since 2025</span>
+          <div class="trust-badge mx-auto inline-flex mt-3">
+            <i class="fas fa-calendar-alt text-[#9b6a4b]"></i>
+            <span>Trusted HSE Partner Since 2025</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services Section (animations remain) -->
+  <!-- Services Section (unchanged) -->
   <section class="py-20 px-6 bg-gradient-to-b from-white via-[#fefaf5] to-white/80">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14" data-aos="fade-up">
@@ -296,7 +371,7 @@
     </div>
   </section>
 
-  <!-- Testimonials & Stats (animations remain) -->
+  <!-- Testimonials & Stats (unchanged) -->
   <section class="py-20 px-6 bg-white/50">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14" data-aos="fade-up">
@@ -333,7 +408,7 @@
     </div>
   </section>
 
-  <!-- Why Choose Us + CTA (animations remain) -->
+  <!-- Why Choose Us + CTA (unchanged) -->
   <section class="py-16 px-6">
     <div class="max-w-6xl mx-auto glass-card rounded-3xl p-8 md:p-12 text-center backdrop-blur-sm bg-white/70" data-aos="zoom-in-up">
       <h3 class="text-3xl md:text-4xl font-bold text-[#0f3b5f] serif-text">Why Industry Leaders Choose Us</h3>
@@ -347,13 +422,13 @@
   </section>
 </main>
 
-<!-- Footer: NO animations -->
+<!-- Footer with BIGGER and WELL-FITTED logo -->
 <footer class="bg-gradient-to-r from-[#0a2a3b] to-[#124b3e]">
   <div class="max-w-7xl mx-auto px-6 py-10">
     <div class="flex justify-center mb-6">
-      <div class="brand-logo transition-transform hover:scale-105">
-        <img src="images/logo.png" alt="HSE Logo" class="w-36 h-36 md:w-44 md:h-44 object-contain drop-shadow-2xl" 
-             onerror="this.onerror=null; this.src='https://placehold.co/150x150/2e7d64/white?text=HSE';">
+      <div class="brand-logo transition-transform hover:scale-105 w-full flex justify-center">
+        <img src="images/logo.png" alt="HSE Logo" class="footer-logo-large drop-shadow-2xl" 
+             onerror="this.onerror=null; this.src='https://placehold.co/200x200/2e7d64/white?text=HSE';">
       </div>
     </div>
     <div class="flex flex-wrap justify-center gap-6 text-white/80 text-sm font-medium mb-6">
@@ -373,12 +448,13 @@
       </div>
       <div class="flex flex-wrap gap-5 justify-center text-center">
         <span><i class="fas fa-phone-alt text-[#9b6a4b] mr-2"></i> +264 81 129 1157</span>
-        <span><i class="fas fa-envelope text-[#9b6a4b] mr-2"></i> hello@hsesolutions.com</span>
+        <span><i class="fas fa-envelope text-[#9b6a4b] mr-2"></i> info@pamoyahse.com</span>
         <span><i class="fas fa-map-marker-alt text-[#9b6a4b] mr-2"></i> 447 Safety Drive, Houston, TX 77001</span>
       </div>
     </div>
     <div class="text-center text-white/40 text-xs mt-6 pt-3 border-t border-white/5">
       <p>© 2026 HSE Solutions — Protecting People & Environment. ISO 45001 & 14001 Certified.</p>
+      <p class="mt-1">Website developed by <a href="https://www.amateta.com" target="_blank" class="text-[#c48a60] hover:underline">www.amateta.com</a> | A Technology and Graphics cc</p>
     </div>
   </div>
 </footer>
@@ -412,7 +488,6 @@
     
     AOS.init({ duration: 800, once: true, offset: 80 });
     
-    // GSAP only for content elements – not header/footer/buttons
     gsap.registerPlugin(ScrollTrigger);
     gsap.to(".floating-png", { y: 15, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" });
     
